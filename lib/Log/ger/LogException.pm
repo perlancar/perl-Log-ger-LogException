@@ -4,19 +4,24 @@ package Log::ger::LogException;
 # VERSION
 
 use Log::ger;
+use Eval::Util qw(inside_eval);
 
 my $prev_die_handler  = $SIG{__DIE__};
 my $prev_warn_handler = $SIG{__WARN__};
 
 $SIG{__DIE__} = sub {
     my ($msg) = @_;
-    chomp $msg;
-    log_fatal "die(): $msg";
+
+    unless (inside_eval()) {
+        chomp $msg;
+        log_fatal "die(): $msg";
+    }
     if ($prev_die_handler) { goto &$prev_die_handler } else { die @_ }
 };
 
 $SIG{__WARN__} = sub {
     my ($msg) = @_;
+
     chomp $msg;
     log_warn "warn(): $msg";
     if ($prev_warn_handler) { goto &$prev_warn_handler } else { warn @_ }
