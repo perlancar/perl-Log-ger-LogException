@@ -3,8 +3,10 @@ package Log::ger::LogException;
 # DATE
 # VERSION
 
+use strict;
+use warnings;
+
 use Log::ger;
-use Eval::Util qw(inside_eval);
 
 my $prev_die_handler  = $SIG{__DIE__};
 my $prev_warn_handler = $SIG{__WARN__};
@@ -12,7 +14,7 @@ my $prev_warn_handler = $SIG{__WARN__};
 $SIG{__DIE__} = sub {
     my ($msg) = @_;
 
-    unless (inside_eval()) {
+    unless ($^S) {
         chomp $msg;
         log_fatal "die(): $msg";
     }
