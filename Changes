@@ -1,15 +1,15 @@
-0.003   2018-03-12 (PERLANCAR)
+0.003   2018-03-12  Released-By: PERLANCAR
 
 	- No functional changes.
 
 	- Use the simpler $^S instead of Eval::Util.
 
 
-0.002   2018-03-05 (PERLANCAR)
+0.002   2018-03-05  Released-By: PERLANCAR
 
 	- Don't log die() if we're inside eval().
 
 
-0.001    2018-03-05 (PERLANCAR)
+0.001    2018-03-05  Released-By: PERLANCAR
 
          - First release.
